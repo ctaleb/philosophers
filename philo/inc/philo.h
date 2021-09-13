@@ -5,20 +5,26 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct	s_settings
 {
-	int			philos;
-	int			life;
-	int			eat;
-	int			sleep;
-	int			loops;
+	int				philos;
+	int				life;
+	int				eat;
+	int				sleep;
+	int				loops;
+	struct	timeval	start;
+	struct	timeval	current;
 	pthread_t	tid;
 }	t_settings;
 
 typedef struct	s_philo
 {
 	int	id;
+	int	loops;
+	int	last_eat;
+	int	last_sleep;
 	pthread_t	tid;
 	t_settings	*settings;
 }	t_philo;

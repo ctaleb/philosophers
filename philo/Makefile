@@ -7,7 +7,7 @@ INCS = philo.h
 
 SRC_DIR = ./src/
 SRC = main.c \
-		idk.c \
+		checking.c \
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
 OBJS = $(SRCS:.c=.o)
