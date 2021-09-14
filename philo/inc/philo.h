@@ -19,6 +19,8 @@ typedef struct	s_settings
 	pthread_t	tid;
 }	t_settings;
 
+//forks?
+
 typedef struct	s_philo
 {
 	int	id;
