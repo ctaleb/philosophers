@@ -18,6 +18,26 @@ t_philo	init_philo(t_settings *settings, int i)
 	t_philo	philo;
 
 	philo.id = i;
+	philo.loop_count = 0;
+	philo.left_fork = 0;
+	philo.right_fork = 0;
 	philo.settings = settings;
 	return (philo);
+}
+
+int	init_mutex(t_settings *settings)
+{
+	int	i;
+
+	i = 0;
+	settings->forks = malloc(sizeof(pthread_mutex_t) * settings->philos);
+	while (i < settings->philos)
+	{
+		if (pthread_mutex_init(&settings->forks[i], NULL))
+			return (-1);
+		i++;
+	}
+	if (pthread_mutex_init(&settings->voice, NULL))
+		return (-1);
+	return (0);
 }

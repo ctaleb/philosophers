@@ -16,7 +16,7 @@ int	get_value(char *str)
 int	parser(int ac, char *av[], t_settings *settings)
 {
 	int	i;
-	int	j;
+	// int	j;
 
 	i = 1;
 	settings->philos = get_value(av[i++]);

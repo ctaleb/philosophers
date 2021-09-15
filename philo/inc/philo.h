@@ -14,8 +14,9 @@ typedef struct	s_settings
 	int				eat;
 	int				sleep;
 	int				loops;
-	struct	timeval	start;
-	struct	timeval	current;
+	struct timeval	start;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	voice;
 	pthread_t	tid;
 }	t_settings;
 
@@ -24,9 +25,11 @@ typedef struct	s_settings
 typedef struct	s_philo
 {
 	int	id;
-	int	loops;
-	int	last_eat;
-	int	last_sleep;
+	int	loop_count;
+	int	left_fork;
+	int	right_fork;
+	struct timeval	last_eat;
+	struct timeval	last_sleep;
 	pthread_t	tid;
 	t_settings	*settings;
 }	t_philo;
@@ -34,12 +37,16 @@ typedef struct	s_philo
 	//inits
 t_settings		init_settings(pthread_t *tid);
 t_philo			init_philo(t_settings *settings, int i);
+int				init_mutex(t_settings *settings);
 
 	//philos
 void			*birth(void *data);
 
 	//parsing
 int				parser(int ac, char *av[], t_settings *settings);
+
+	//time
+int				get_time(struct timeval start);
 
 	//misc
 int				check_settings(int ac, t_settings *settings);
