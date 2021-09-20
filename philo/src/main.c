@@ -4,7 +4,7 @@ int	main(int ac, char *av[])
 {
 	int			i;
 	pthread_t	tid;
-	t_philo		*philo;
+	// t_philo		*philo;
 	t_settings	settings;
 
 	if (ac < 5 || ac > 6)
@@ -12,41 +12,34 @@ int	main(int ac, char *av[])
 	settings = init_settings(&tid);
 	if (parser(ac, av, &settings) < 0)
 		return (-1);
-	philo = ft_calloc(settings.philos + 1, sizeof(t_philo));
-	i = 0;
-	while (i < settings.philos)
-	{
-		philo[i] = init_philo(&settings, i);
-		pthread_create(&tid, NULL, birth, &philo[i]);
-		settings.tid = tid;
-		// printf("tid %i\n", (int)tid);
-		usleep(20);
-		// printf("philo num %i\n", i + 1);
-		i++;
-	}
+	settings.philo = ft_calloc(settings.philo_count + 1, sizeof(t_philo));
+	gettimeofday(&settings.start, NULL);
 	if (init_mutex(&settings))
 	{
 		// free_exit(settings);
 		return (-1);
 	}
+	i = 0;
+	while (i < settings.philo_count)
+	{
+		settings.philo[i] = init_philo(&settings, i);
+		pthread_create(&tid, NULL, birth, &settings.philo[i]);
+		settings.tid = tid;
+		usleep(20);
+		i++;
+	}
 
-	// gettimeofday(&settings.start, NULL);
-	// printf("time is: %ld, %d\n", settings.start.tv_sec, settings.start.tv_usec);
-	// usleep(1400);
-	// printf("time spent was: %d\n", get_time(settings.start));
-
-	// test
-	// i = 0;
-	// while (i < settings.philos)
-	// {
-	// 	printf("philo %i has id %i\n", philo[i].id, (int)philo[i].tid);
-	// 	i++;
-	// }
+	while (1)
+	{
+		i = 0;
+		while (i < settings.philo_count)
+		{
+			if (check_hunger(&settings.philo[i]) == -1)
+				break ;
+			usleep(20);
+			i++;
+		}
+	}
 	
-
-	// printf("settings are %i life\t%i eat\t%i sleep", settings.life, settings.eat, settings.sleep);
-	// if (settings.loops > 0)
-	// 	printf("\t%i loops", settings.loops);
-	// printf("\n");
 	return (0);
 }

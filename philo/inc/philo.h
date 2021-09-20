@@ -7,9 +7,12 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+typedef struct s_philo	t_philo;
+
 typedef struct	s_settings
 {
-	int				philos;
+	int				philo_count;
+	t_philo			*philo;
 	int				life;
 	int				eat;
 	int				sleep;
@@ -20,9 +23,7 @@ typedef struct	s_settings
 	pthread_t	tid;
 }	t_settings;
 
-//forks?
-
-typedef struct	s_philo
+struct	s_philo
 {
 	int	id;
 	int	loop_count;
@@ -32,7 +33,7 @@ typedef struct	s_philo
 	struct timeval	last_sleep;
 	pthread_t	tid;
 	t_settings	*settings;
-}	t_philo;
+};
 
 	//inits
 t_settings		init_settings(pthread_t *tid);
@@ -41,12 +42,15 @@ int				init_mutex(t_settings *settings);
 
 	//philos
 void			*birth(void *data);
+int				are_alive(t_settings *settings);
+int				check_hunger(t_philo *philo);
+int				check_sleep(t_philo *philo);
 
 	//parsing
 int				parser(int ac, char *av[], t_settings *settings);
 
 	//time
-int				get_time(struct timeval start);
+uint64_t		get_time(struct timeval start);
 
 	//misc
 int				check_settings(int ac, t_settings *settings);

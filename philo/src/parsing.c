@@ -19,7 +19,7 @@ int	parser(int ac, char *av[], t_settings *settings)
 	// int	j;
 
 	i = 1;
-	settings->philos = get_value(av[i++]);
+	settings->philo_count = get_value(av[i++]);
 	settings->life = get_value(av[i++]);
 	settings->eat = get_value(av[i++]);
 	settings->sleep = get_value(av[i++]);
