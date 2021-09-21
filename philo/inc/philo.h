@@ -21,7 +21,6 @@ typedef struct s_settings
 	struct timeval	start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	voice;
-	pthread_t		tid;
 }	t_settings;
 
 struct s_philo

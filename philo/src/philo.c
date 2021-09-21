@@ -50,7 +50,6 @@ void	*birth(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	philo->tid = philo->settings->tid;
 	while (!philo->settings->sync)
 		usleep(5);
 	philo->last_eat = philo->settings->start;

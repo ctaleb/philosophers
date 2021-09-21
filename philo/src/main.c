@@ -2,6 +2,7 @@
 
 int	main(int ac, char *av[])
 {
+	int			i;
 	t_settings	settings;
 
 	if (ac < 5 || ac > 6)
@@ -19,5 +20,11 @@ int	main(int ac, char *av[])
 	gettimeofday(&settings.start, NULL);
 	settings.sync = 1;
 	loop(&settings);
+	i = 0;
+	while (i < settings.philo_count)
+	{
+		pthread_join(settings.philo[i].tid, NULL);
+		i++;
+	}
 	return (free_exit(&settings, 0));
 }
