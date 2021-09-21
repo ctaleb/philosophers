@@ -9,7 +9,7 @@ void	set_forks(t_philo *philo)
 		philo->right_fork = philo->id + 1;
 }
 
-t_settings	init_settings(pthread_t *tid)
+t_settings	init_settings(void)
 {
 	t_settings	settings;
 
@@ -18,7 +18,7 @@ t_settings	init_settings(pthread_t *tid)
 	settings.eat = -1;
 	settings.sleep = -1;
 	settings.loops = -1;
-	settings.tid = *tid;
+	settings.sync = 0;
 	return (settings);
 }
 
@@ -49,5 +49,23 @@ int	init_mutex(t_settings *settings)
 	}
 	if (pthread_mutex_init(&settings->voice, NULL))
 		return (-1);
+	return (0);
+}
+
+int	gen_philo(t_settings *settings)
+{
+	pthread_t	tid;
+	int			i;
+
+	i = 0;
+	while (i < settings->philo_count)
+	{
+		settings->philo[i] = init_philo(settings, i);
+		if (pthread_create(&tid, NULL, birth, &settings->philo[i]) != 0)
+			return (-1);
+		settings->tid = tid;
+		usleep(20);
+		i++;
+	}
 	return (0);
 }

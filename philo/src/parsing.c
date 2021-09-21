@@ -8,15 +8,20 @@ int	get_value(char *str)
 	nb = ft_atoi(str);
 	nbr = ft_itoa(nb);
 	if (ft_strncmp(str, nbr, ft_strlen(str)))
+	{
+		free (nbr);
 		return (-1);
+	}
 	else
+	{
+		free (nbr);
 		return (nb);
+	}
 }
 
 int	parser(int ac, char *av[], t_settings *settings)
 {
 	int	i;
-	// int	j;
 
 	i = 1;
 	settings->philo_count = get_value(av[i++]);

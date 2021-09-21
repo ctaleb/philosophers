@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
+VALS = 4 410 200 200 5
 RM = rm -rf
 
 INCS_PATH = inc/
@@ -13,7 +14,8 @@ SRC = main.c \
 		parsing_utils.c \
 		parsing.c \
 		philo.c \
-		utils.c
+		utils.c \
+		freeing.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
 OBJS = $(SRCS:.c=.o)
@@ -29,7 +31,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ -I $(INCS_PATH). $(OBJS)
 
 run: all
-	./$(NAME) 7 100 50 50
+	./$(NAME) $(VALS)
 
 clean:
 	$(RM) $(OBJS)
