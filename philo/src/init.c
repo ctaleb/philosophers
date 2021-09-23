@@ -40,7 +40,8 @@ int	init_mutex(t_settings *settings)
 	int	i;
 
 	i = 0;
-	settings->forks = ft_calloc(settings->philo_count + 1, sizeof(pthread_mutex_t));
+	settings->forks = ft_calloc(settings->philo_count + 1,
+			sizeof(pthread_mutex_t));
 	while (i < settings->philo_count)
 	{
 		if (pthread_mutex_init(&settings->forks[i], NULL))
@@ -60,7 +61,8 @@ int	gen_philo(t_settings *settings)
 	while (i < settings->philo_count)
 	{
 		settings->philo[i] = init_philo(settings, i);
-		if (pthread_create(&settings->philo[i].tid, NULL, birth, &settings->philo[i]) != 0)
+		if (pthread_create(&settings->philo[i].tid, NULL,
+				birth, &settings->philo[i]) != 0)
 			return (-1);
 		i++;
 	}

@@ -28,18 +28,3 @@ int	check_hunger(t_philo *philo)
 	}
 	return (0);
 }
-
-int	check_loops(t_settings *settings)
-{
-	int	i;
-
-	i = 0;
-	while (i < settings->philo_count)
-	{
-		if (settings->philo[i].loop_count >= settings->loops)
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}

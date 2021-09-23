@@ -54,7 +54,6 @@ int				parser(int ac, char *av[], t_settings *settings);
 	//checking
 int				check_settings(int ac, t_settings *settings);
 int				check_hunger(t_philo *philo);
-int				check_loops(t_settings *settings);
 
 	//time
 uint64_t		get_time(struct timeval start);

@@ -35,18 +35,27 @@ int	are_alive(t_settings *settings)
 void	loop(t_settings *settings)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (i < settings->philo_count)
 	{
 		if (check_hunger(&settings->philo[i]) == -1)
-			break ;
+			return ;
 		usleep(20);
 		i++;
 		if (settings->loops > 0)
-			if (check_loops(settings))
-				break ;
-		if (i >= settings->philo_count)
+		{
+			if (settings->philo[i].loop_count >= settings->loops)
+				j++;
+		}
+		if (j >= settings->philo_count - 1)
+			return ;
+		if (i >= settings->philo_count - 1)
+		{
 			i = 0;
+			j = 0;
+		}
 	}
 }
