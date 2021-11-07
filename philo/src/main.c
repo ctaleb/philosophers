@@ -19,5 +19,7 @@ int	main(int ac, char *av[])
 	gettimeofday(&settings.start, NULL);
 	settings.sync = 1;
 	loop(&settings);
+	while (settings.philo_count--)
+		pthread_join(settings.philo[settings.philo_count].tid, NULL);
 	return (free_exit(&settings, 0));
 }

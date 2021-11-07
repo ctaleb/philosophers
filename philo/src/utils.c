@@ -18,6 +18,23 @@ void	rtsleep(struct timeval start, u_int64_t goal)
 		usleep(100);
 }
 
+int	smart_talk(t_philo *philo, char *msg)
+{
+	u_int64_t	time;
+
+	pthread_mutex_lock(&philo->settings->voice);
+	if (philo->settings->extinct)
+	{
+		pthread_mutex_unlock(&philo->settings->voice);
+		return (1);
+	}
+	time = get_time(philo->settings->start);
+	printf("%llu %i ", time, philo->id + 1);
+	printf("%s\n", msg);
+	pthread_mutex_unlock(&philo->settings->voice);
+	return (0);
+}
+
 int	are_alive(t_settings *settings)
 {
 	int	i;

@@ -4,17 +4,11 @@ void	sleeping(t_philo *philo)
 {
 	u_int64_t	time;
 
-	pthread_mutex_lock(&philo->settings->voice);
-	time = get_time(philo->settings->start);
-	printf("%llu: Philo %i is sleeping.\n", time, philo->id + 1);
-	pthread_mutex_unlock(&philo->settings->voice);
+	smart_talk(philo, "is sleeping");
 	gettimeofday(&philo->last_sleep, NULL);
 	time = get_time(philo->settings->start) + philo->settings->sleep;
 	rtsleep(philo->settings->start, time);
-	pthread_mutex_lock(&philo->settings->voice);
-	time = get_time(philo->settings->start);
-	printf("%llu: Philo %i is thinking.\n", time, philo->id + 1);
-	pthread_mutex_unlock(&philo->settings->voice);
+	smart_talk(philo, "is thinking");
 }
 
 void	eating(t_philo	*philo)
@@ -22,16 +16,10 @@ void	eating(t_philo	*philo)
 	u_int64_t	time;
 
 	pthread_mutex_lock(&philo->settings->forks[philo->left_fork]);
-	pthread_mutex_lock(&philo->settings->voice);
-	time = get_time(philo->settings->start);
-	printf("%llu: Philo %i has taken a fork.\n", time, philo->id + 1);
-	pthread_mutex_unlock(&philo->settings->voice);
+	smart_talk(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->settings->forks[philo->right_fork]);
-	pthread_mutex_lock(&philo->settings->voice);
-	time = get_time(philo->settings->start);
-	printf("%llu: Philo %i has taken a fork.\n", time, philo->id + 1);
-	printf("%llu: Philo %i is eating.\n", time, philo->id + 1);
-	pthread_mutex_unlock(&philo->settings->voice);
+	smart_talk(philo, "has taken a fork");
+	smart_talk(philo, "is eating");
 	gettimeofday(&philo->last_eat, NULL);
 	time = get_time(philo->settings->start) + philo->settings->eat;
 	rtsleep(philo->settings->start, time);
@@ -60,7 +48,7 @@ void	*birth(void *data)
 		eating(philo);
 		usleep(50);
 	}
-	while (are_alive(philo->settings))
+	while (are_alive(philo->settings) && !philo->settings->extinct)
 	{
 		if (philo->settings->loops > 0
 			&& philo->loop_count >= philo->settings->loops)

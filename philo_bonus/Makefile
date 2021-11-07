@@ -1,25 +1,24 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O3
-RM = rm -rf
+CFLAGS = -Wall -Wextra -Werror
+RM = rm rf
 
 INCS_PATH = inc/
-INCS = philo.h
+INCS = philo_bonus.h
 
 SRC_DIR = ./src/
 SRC =	main.c			\
-		checking.c		\
 		init.c			\
+		freeing.c		\
+		checking.c		\
 		mem_utils.c		\
 		parsing_utils.c	\
-		parsing.c		\
 		philo.c			\
-		utils.c			\
-		freeing.c
+		parsing.c		
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 
 OBJS = $(SRCS:.c=.o)
 
-NAME = philo
+NAME = philo_bonus
 
 %.o: %.c $(INCS_PATH)$(INCS)
 	$(CC) $(CFLAGS) -I $(INCS_PATH). -o $@ -c $<

@@ -18,6 +18,7 @@ typedef struct s_settings
 	int				sleep;
 	int				loops;
 	int				sync;
+	int				extinct;
 	struct timeval	start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	voice;
@@ -41,6 +42,7 @@ t_philo			init_philo(t_settings *settings, int i);
 int				init_mutex(t_settings *settings);
 
 	//philos
+int				smart_talk(t_philo *philo, char *msg);
 int				gen_philo(t_settings *settings);
 void			*birth(void *data);
 int				are_alive(t_settings *settings);

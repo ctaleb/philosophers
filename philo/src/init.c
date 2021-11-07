@@ -19,6 +19,7 @@ t_settings	init_settings(void)
 	settings.sleep = -1;
 	settings.loops = -1;
 	settings.sync = 0;
+	settings.extinct = 0;
 	return (settings);
 }
 
