@@ -10,7 +10,7 @@ void	init_semaphore(t_settings *settings)
 	settings->voice = sem_open("voice", O_CREAT | O_EXCL, \
 			S_IRWXU, 1);
 	settings->sync = sem_open("sync", O_CREAT | O_EXCL, \
-			S_IRWXU, 1);
+			S_IRWXU, 0);
 	if (settings->forks == SEM_FAILED
 		|| settings->voice == SEM_FAILED
 		|| settings->sync == SEM_FAILED)

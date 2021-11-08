@@ -4,9 +4,19 @@ void	wait_end(t_settings *settings)
 {
 	int	status;
 	int	pid;
+	int	i;
 
 	pid = waitpid(-1, &status, 0);
-	(void)settings;
+	if (WEXITSTATUS(status) == 3)
+	{
+		i = 0;
+		while (i < settings->philo_count)
+		{
+			kill(settings->pids[i], SIGKILL);
+			i++;
+		}
+	}
+	// (void)settings;
 	printf("end\n");
 }
 

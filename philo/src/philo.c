@@ -5,7 +5,6 @@ void	sleeping(t_philo *philo)
 	u_int64_t	time;
 
 	smart_talk(philo, "is sleeping");
-	gettimeofday(&philo->last_sleep, NULL);
 	time = get_time(philo->settings->start) + philo->settings->sleep;
 	rtsleep(philo->settings->start, time);
 	smart_talk(philo, "is thinking");

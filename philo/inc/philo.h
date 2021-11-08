@@ -31,7 +31,6 @@ struct s_philo
 	int				left_fork;
 	int				right_fork;
 	struct timeval	last_eat;
-	struct timeval	last_sleep;
 	pthread_t		tid;
 	t_settings		*settings;
 };

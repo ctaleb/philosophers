@@ -13,6 +13,7 @@ SRC =	main.c			\
 		mem_utils.c		\
 		parsing_utils.c	\
 		philo.c			\
+		utils.c			\
 		parsing.c		
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 

@@ -17,7 +17,6 @@ typedef struct s_philo
 {
 	int				id;
 	struct timeval	last_eat;
-	struct timeval	last_sleep;
 }	t_philo;
 
 typedef struct s_settings 
@@ -51,6 +50,9 @@ int				parser(int ac, char *av[], t_settings *settings);
 
 	//checking
 int				check_settings(int ac, t_settings *settings);
+
+	//time
+uint64_t		get_time(struct timeval start);
 
 	//misc
 int				ft_atoi(const char *str);
