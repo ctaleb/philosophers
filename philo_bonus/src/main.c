@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/09 09:10:26 by ctaleb            #+#    #+#             */
+/*   Updated: 2021/11/09 10:04:17 by ctaleb           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_bonus.h"
 
 void	wait_end(t_settings *settings)
@@ -16,8 +28,8 @@ void	wait_end(t_settings *settings)
 			i++;
 		}
 	}
-	// (void)settings;
-	printf("end\n");
+	free(settings->pids);
+	free_exit(settings, 0);
 }
 
 int	main(int ac, char *av[])

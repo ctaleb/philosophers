@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/09 09:07:53 by ctaleb            #+#    #+#             */
+/*   Updated: 2021/11/09 10:03:28 by ctaleb           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
@@ -19,14 +31,13 @@ typedef struct s_philo
 	struct timeval	last_eat;
 }	t_philo;
 
-typedef struct s_settings 
+typedef struct s_settings
 {
 	int				philo_count;
 	int				life;
 	int				eat;
 	int				sleep;
 	int				loops;
-	// int				extinct;
 	sem_t			*forks;
 	sem_t			*voice;
 	sem_t			*sync;
@@ -36,7 +47,7 @@ typedef struct s_settings
 }	t_settings;
 
 	//mem
-void			free_exit(t_settings *settings);
+void			free_exit(t_settings *settings, int code);
 
 	//inits
 t_settings		init_settings(void);
@@ -44,6 +55,9 @@ void			init_semaphore(t_settings *settings);
 
 	//philos
 void			gen_philos(t_settings *settings);
+int				smart_talk(t_settings *settings, char *msg);
+void			eating(t_settings *settings);
+void			sleeping(t_settings *settings);
 
 	//parsing
 int				parser(int ac, char *av[], t_settings *settings);
@@ -53,6 +67,7 @@ int				check_settings(int ac, t_settings *settings);
 
 	//time
 uint64_t		get_time(struct timeval start);
+void			rtsleep(struct timeval start, u_int64_t goal);
 
 	//misc
 int				ft_atoi(const char *str);

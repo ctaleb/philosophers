@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/09 09:09:53 by ctaleb            #+#    #+#             */
+/*   Updated: 2021/11/09 10:04:55 by ctaleb           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_bonus.h"
 
 void	init_semaphore(t_settings *settings)
@@ -14,7 +26,7 @@ void	init_semaphore(t_settings *settings)
 	if (settings->forks == SEM_FAILED
 		|| settings->voice == SEM_FAILED
 		|| settings->sync == SEM_FAILED)
-		free_exit(settings);
+		free_exit(settings, -1);
 }
 
 t_settings	init_settings(void)
@@ -27,6 +39,5 @@ t_settings	init_settings(void)
 	settings.sleep = -1;
 	settings.loops = -1;
 	settings.sync = 0;
-	// settings.extinct = 0;
 	return (settings);
 }

@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-RM = rm rf
+RM = rm -rf
 
 INCS_PATH = inc/
 INCS = philo_bonus.h
@@ -13,6 +13,7 @@ SRC =	main.c			\
 		mem_utils.c		\
 		parsing_utils.c	\
 		philo.c			\
+		life.c			\
 		utils.c			\
 		parsing.c		
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
