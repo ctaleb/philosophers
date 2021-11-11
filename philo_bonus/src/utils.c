@@ -6,7 +6,7 @@
 /*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 09:11:36 by ctaleb            #+#    #+#             */
-/*   Updated: 2021/11/09 09:11:37 by ctaleb           ###   ########lyon.fr   */
+/*   Updated: 2021/11/11 13:54:22 by ctaleb           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ int	smart_talk(t_settings *settings, char *msg)
 
 	sem_wait(settings->voice);
 	time = get_time(settings->start);
-	printf("%llu %i ", time, settings->philo.id + 1);
-	printf("%s\n", msg);
+	ft_putnbr_fd(time, 1);
+	ft_putchar_fd(' ', 1);
+	ft_putnbr_fd(settings->philo.id + 1, 1);
+	ft_putchar_fd(' ', 1);
+	ft_putstr_fd(msg, 1);
+	ft_putchar_fd('\n', 1);
 	if (ft_strncmp(msg, "died", 4))
 		sem_post(settings->voice);
 	return (0);

@@ -15,6 +15,7 @@ SRC =	main.c			\
 		philo.c			\
 		life.c			\
 		utils.c			\
+		print_utils.c	\
 		parsing.c		
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 

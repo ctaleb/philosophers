@@ -6,7 +6,7 @@
 /*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 09:10:26 by ctaleb            #+#    #+#             */
-/*   Updated: 2021/11/09 10:04:17 by ctaleb           ###   ########lyon.fr   */
+/*   Updated: 2021/11/11 13:44:41 by ctaleb           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	wait_end(t_settings *settings)
 			i++;
 		}
 	}
+	while (wait(NULL) != -1)
+		continue ;
 	free(settings->pids);
 	free_exit(settings, 0);
 }
@@ -41,6 +43,8 @@ int	main(int ac, char *av[])
 	settings = init_settings();
 	if (parser(ac, av, &settings) < 0)
 		return (-1);
+	if (settings.loops == 0)
+		return (0);
 	init_semaphore(&settings);
 	gen_philos(&settings);
 	wait_end(&settings);

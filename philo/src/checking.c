@@ -6,7 +6,7 @@
 /*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 09:12:35 by ctaleb            #+#    #+#             */
-/*   Updated: 2021/11/09 09:12:36 by ctaleb           ###   ########lyon.fr   */
+/*   Updated: 2021/11/11 11:30:27 by ctaleb           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	check_hunger(t_philo *philo)
 			return (0);
 		smart_talk(philo, "died");
 		philo->settings->extinct = 1;
+		pthread_mutex_unlock(&philo->settings->forks[philo->left_fork]);
+		pthread_mutex_unlock(&philo->settings->forks[philo->right_fork]);
 		return (-1);
 	}
 	return (0);

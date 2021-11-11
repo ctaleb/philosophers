@@ -6,7 +6,7 @@
 /*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 09:12:54 by ctaleb            #+#    #+#             */
-/*   Updated: 2021/11/09 09:12:56 by ctaleb           ###   ########lyon.fr   */
+/*   Updated: 2021/11/11 13:54:28 by ctaleb           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@ uint64_t	get_time(struct timeval start)
 	return (t2 - t1);
 }
 
-void	rtsleep(struct timeval start, u_int64_t goal)
+int	rtsleep(struct timeval start, u_int64_t goal, t_philo *philo)
 {
 	while (get_time(start) < goal)
+	{
+		if (philo->settings->extinct)
+			return (1);
 		usleep(100);
+	}
+	return (0);
 }
 
 int	smart_talk(t_philo *philo, char *msg)
@@ -41,8 +46,12 @@ int	smart_talk(t_philo *philo, char *msg)
 		return (1);
 	}
 	time = get_time(philo->settings->start);
-	printf("%llu %i ", time, philo->id + 1);
-	printf("%s\n", msg);
+	ft_putnbr_fd(time, 1);
+	ft_putchar_fd(' ', 1);
+	ft_putnbr_fd(philo->id + 1, 1);
+	ft_putchar_fd(' ', 1);
+	ft_putstr_fd(msg, 1);
+	ft_putchar_fd('\n', 1);
 	pthread_mutex_unlock(&philo->settings->voice);
 	return (0);
 }
@@ -79,7 +88,8 @@ void	loop(t_settings *settings)
 			if (settings->philo[i].loop_count >= settings->loops)
 				j++;
 		}
-		if (j >= settings->philo_count - 1)
+		if (j >= settings->philo_count - 1 && settings->loops > 0
+			&& settings->philo_count > 1)
 			return ;
 		if (i >= settings->philo_count - 1)
 		{

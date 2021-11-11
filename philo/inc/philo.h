@@ -6,7 +6,7 @@
 /*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 09:12:32 by ctaleb            #+#    #+#             */
-/*   Updated: 2021/11/09 09:12:34 by ctaleb           ###   ########lyon.fr   */
+/*   Updated: 2021/11/11 13:54:43 by ctaleb           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,15 @@ int				check_hunger(t_philo *philo);
 
 	//time
 uint64_t		get_time(struct timeval start);
-void			rtsleep(struct timeval start, u_int64_t goal);
+int				rtsleep(struct timeval start, u_int64_t goal, t_philo *philo);
 
 	//memory
 int				free_exit(t_settings *settings, int code);
+
+	//printing
+void			ft_putnbr_fd(int n, int fd);
+void			ft_putstr_fd(char *s, int fd);
+void			ft_putchar_fd(char c, int fd);
 
 	//misc
 int				ft_atoi(const char *str);

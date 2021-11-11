@@ -6,7 +6,7 @@
 /*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 09:12:52 by ctaleb            #+#    #+#             */
-/*   Updated: 2021/11/09 09:12:53 by ctaleb           ###   ########lyon.fr   */
+/*   Updated: 2021/11/11 11:10:25 by ctaleb           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	sleeping(t_philo *philo)
 
 	smart_talk(philo, "is sleeping");
 	time = get_time(philo->settings->start) + philo->settings->sleep;
-	rtsleep(philo->settings->start, time);
+	if (rtsleep(philo->settings->start, time, philo))
+		return ;
 	smart_talk(philo, "is thinking");
 }
 
@@ -33,7 +34,12 @@ void	eating(t_philo	*philo)
 	smart_talk(philo, "is eating");
 	gettimeofday(&philo->last_eat, NULL);
 	time = get_time(philo->settings->start) + philo->settings->eat;
-	rtsleep(philo->settings->start, time);
+	if (rtsleep(philo->settings->start, time, philo))
+	{
+		pthread_mutex_unlock(&philo->settings->forks[philo->left_fork]);
+		pthread_mutex_unlock(&philo->settings->forks[philo->right_fork]);
+		return ;
+	}
 	pthread_mutex_unlock(&philo->settings->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->settings->forks[philo->right_fork]);
 	if (philo->settings->loops > 0)

@@ -6,7 +6,7 @@
 /*   By: ctaleb <ctaleb@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 09:07:53 by ctaleb            #+#    #+#             */
-/*   Updated: 2021/11/09 10:03:28 by ctaleb           ###   ########lyon.fr   */
+/*   Updated: 2021/11/11 12:40:00 by ctaleb           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ int				parser(int ac, char *av[], t_settings *settings);
 
 	//checking
 int				check_settings(int ac, t_settings *settings);
+
+	//printing
+void			ft_putnbr_fd(int n, int fd);
+void			ft_putstr_fd(char *s, int fd);
+void			ft_putchar_fd(char c, int fd);
 
 	//time
 uint64_t		get_time(struct timeval start);
